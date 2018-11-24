@@ -2,7 +2,6 @@ package uk.gov.hmcts.reform.fpl.controllers;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -28,9 +27,10 @@ public class CaseInitiationController {
     }
 
     @PostMapping
-    public ResponseEntity createdCase(
+    public AboutToStartOrSubmitCallbackResponse createdCase(
         @RequestHeader(value = "authorization") String authorization,
         @RequestBody CallbackRequest callbackrequest) {
+
         String caseLocalAuthority = localAuthorityNameService.getLocalAuthorityCode(authorization);
         CaseDetails caseDetails = callbackrequest.getCaseDetails();
 
@@ -41,6 +41,6 @@ public class CaseInitiationController {
             .data(data)
             .build();
 
-        return ResponseEntity.ok(body);
+        return body;
     }
 }

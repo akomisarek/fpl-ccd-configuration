@@ -3,11 +3,11 @@ package uk.gov.hmcts.reform.fpl.controllers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.reactive.server.WebTestClient;
 import uk.gov.hmcts.reform.document.domain.Document;
 import uk.gov.hmcts.reform.fpl.service.CaseRepository;
 import uk.gov.hmcts.reform.fpl.service.DocumentGeneratorService;
@@ -16,13 +16,11 @@ import uk.gov.hmcts.reform.fpl.service.UploadDocumentService;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.gov.hmcts.reform.fpl.utils.DocumentManagementStoreLoader.document;
 import static uk.gov.hmcts.reform.fpl.utils.ResourceReader.readBytes;
 
 @ActiveProfiles("integration-test")
-@WebMvcTest(CaseSubmissionController.class)
+@WebFluxTest(CaseSubmissionController.class)
 @OverrideAutoConfiguration(enabled = true)
 class CaseSubmissionControllerTest {
 
@@ -37,7 +35,7 @@ class CaseSubmissionControllerTest {
     private CaseRepository caseRepository;
 
     @Autowired
-    private MockMvc mockMvc;
+    private WebTestClient webClient;
 
     @Test
     void shouldReturnSuccessfulResponseWithValidCaseData() throws Exception {
@@ -49,13 +47,14 @@ class CaseSubmissionControllerTest {
         given(uploadDocumentService.uploadPDF(USER_ID, AUTH_TOKEN, pdf, "2313.pdf"))
             .willReturn(document);
 
-        mockMvc
-            .perform(post("/callback/case-submission")
-                .header("authorization", AUTH_TOKEN)
-                .header("user-id", USER_ID)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(readBytes("fixtures/case.json")))
-            .andExpect(status().isOk());
+        webClient
+            .post().uri("/callback/case-submission")
+            .header("authorization", AUTH_TOKEN)
+            .header("user-id", USER_ID)
+            .contentType(MediaType.APPLICATION_JSON)
+            .syncBody(readBytes("fixtures/case.json"))
+            .exchange()
+            .expectStatus().is2xxSuccessful();
 
         Thread.sleep(3000);
         verify(caseRepository).setSubmittedFormPDF(AUTH_TOKEN, USER_ID, "2313", document);
@@ -63,21 +62,23 @@ class CaseSubmissionControllerTest {
 
     @Test
     void shouldReturnUnsuccessfulResponseWithNoData() throws Exception {
-        mockMvc
-            .perform(post("/callback/case-submission")
-                .header("authorization", AUTH_TOKEN)
-                .header("user-id", USER_ID))
-            .andExpect(status().is4xxClientError());
+        webClient
+            .post().uri("/callback/case-submission")
+            .header("authorization", AUTH_TOKEN)
+            .header("user-id", USER_ID)
+            .exchange()
+            .expectStatus().is4xxClientError();
     }
 
     @Test
     void shouldReturnUnsuccessfulResponseWithMalformedData() throws Exception {
-        mockMvc
-            .perform(post("/callback/case-submission")
-                .header("authorization", AUTH_TOKEN)
-                .header("user-id", USER_ID)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("Mock"))
-            .andExpect(status().is4xxClientError());
+        webClient
+            .post().uri("/callback/case-submission")
+            .header("authorization", AUTH_TOKEN)
+            .header("user-id", USER_ID)
+            .contentType(MediaType.APPLICATION_JSON)
+            .syncBody("Mock")
+            .exchange()
+            .expectStatus().is4xxClientError();
     }
 }

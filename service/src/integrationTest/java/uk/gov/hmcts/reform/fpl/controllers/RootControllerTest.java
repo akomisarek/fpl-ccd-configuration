@@ -3,30 +3,24 @@ package uk.gov.hmcts.reform.fpl.controllers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 @ActiveProfiles("integration-test")
-@WebMvcTest(RootController.class)
+@WebFluxTest(RootController.class)
 @OverrideAutoConfiguration(enabled = true)
 class RootControllerTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    private WebTestClient webClient;
 
     @Test
-    void shouldWelcomeUponRootRequestWith200ResponseCode() throws Exception {
-        MvcResult response = mockMvc
-            .perform(get("/"))
-            .andExpect(status().isOk())
-            .andReturn();
-
-        assertThat(response.getResponse().getContentAsString()).startsWith("Welcome");
+    void shouldWelcomeUponRootRequestWith200ResponseCode() {
+        webClient
+            .get().uri("/")
+            .exchange()
+            .expectStatus().is2xxSuccessful()
+            .expectBody(String.class).isEqualTo("Welcome to fpl-service");
     }
 }

@@ -140,6 +140,9 @@ repositories {
   maven {
     url  "http://repo.spring.io/milestone"
   }
+  maven {
+    url "http://oss.jfrog.org/artifactory/oss-snapshot-local"
+  }
 }
 
 // it is important to specify logback classic and core packages explicitly as libraries like spring boot
@@ -147,16 +150,17 @@ repositories {
 def versions = [
   reformLogging: '3.0.2',
   springBoot: springBoot.class.package.implementationVersion,
-  springfoxSwagger: '2.9.2'
+  springfoxSwagger: '3.0.0-SNAPSHOT'
 ]
 
 dependencies {
-  compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: versions.springBoot
+  compile group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: versions.springBoot
   compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: versions.springBoot
   
   compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '2.0.2.RELEASE'
   
   compile group: 'io.springfox', name: 'springfox-swagger2', version: versions.springfoxSwagger
+  compile group: 'io.springfox', name: 'springfox-spring-webflux', version: versions.springfoxSwagger
   compile group: 'io.springfox', name: 'springfox-swagger-ui', version: versions.springfoxSwagger
 
   compile group: 'uk.gov.hmcts.reform', name: 'java-logging', version: versions.reformLogging
