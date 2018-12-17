@@ -18,6 +18,7 @@ delete config.helpers.Puppeteer;
 config.helpers.WebDriverIO = {
   url: process.env.URL,
   browser: process.env.SAUCE_BROWSER || saucelabs_browserName,
+  smartWait: '10000',
   cssSelectorsEnabled: 'true',
   host: 'ondemand.saucelabs.com',
   port: 80,
