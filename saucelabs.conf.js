@@ -2,8 +2,10 @@
 const supportedBrowsers = require('./e2e/crossbrowser/supportedBrowsers.js');
 
 const saucelabs_tunnelId= 'reformtunnel';
-const saucelabs_username = 'username';
-const saucelabs_accesskey = 'privatekey';
+//const saucelabs_username = 'username';
+//const saucelabs_accesskey = 'privatekey';
+const saucelabs_username = 'SivaK';
+const saucelabs_accesskey = '65e1e5c6-ae4b-4432-9854-276fff0610d8';
 const tunnelName = process.env.SAUCE_TUNNEL_IDENTIFIER || saucelabs_tunnelId;
 const saucelabs_browserName = 'chrome';
 
