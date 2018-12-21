@@ -22,6 +22,9 @@ services:
       - FPL_LOCAL_AUTHORITY_CODE_TO_CAFCASS_MAPPING=SA=>Cafcass Cymru:FamilyPublicLaw+cafcassWales@gmail.com;HN=>Cafcass:FamilyPublicLaw+cafcassEngland@gmail.com
       - NOTIFY_API_KEY
       - CCD_UI_BASE_URL=http://localhost:3451
+      - IDAM_CLIENT_ID=ccd_admin
+      - IDAM_CLIENT_SECRET=IIIIIIIIIIIIIIII
+      - IDAM_CLIENT_REDIRECT_URI=https://localhost:3100/oauth2redirect
       # these environment variables are used by java-logging library
       - ROOT_APPENDER
       - JSON_CONSOLE_PRETTY_PRINT

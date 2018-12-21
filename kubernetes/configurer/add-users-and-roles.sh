@@ -14,3 +14,7 @@ ${dir}/utils/idam-create-caseworker.sh cafcass@example.com caseworker,caseworker
 ${dir}/utils/ccd-add-role.sh caseworker-publiclaw-solicitor
 ${dir}/utils/ccd-add-role.sh caseworker-publiclaw-courtadmin
 ${dir}/utils/ccd-add-role.sh caseworker-publiclaw-cafcass
+
+# System update user
+${dir}/utils/idam-create-caseworker.sh system@example.com caseworker,caseworker-publiclaw,caseworker-publiclaw-localAuthority "(system)"
+${dir}/utils/ccd-add-role.sh caseworker-publiclaw-localAuthority

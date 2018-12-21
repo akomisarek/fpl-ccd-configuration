@@ -12,6 +12,8 @@ spring:
     name: fpl-service
 
 idam:
+  client:
+    id: fpl_case_service
   s2s-auth:
     microservice: fpl_case_service
 

@@ -12,6 +12,7 @@ import uk.gov.hmcts.reform.fpl.service.CaseRepository;
 import uk.gov.hmcts.reform.fpl.service.DocumentGeneratorService;
 import uk.gov.hmcts.reform.fpl.service.UploadDocumentService;
 import uk.gov.hmcts.reform.fpl.service.UserDetailsService;
+import uk.gov.hmcts.reform.idam.client.IdamClient;
 
 import static uk.gov.hmcts.reform.fpl.handlers.PdfGenerationHandler.SubmittedFormFilenameHelper.buildFileName;
 
@@ -26,15 +27,19 @@ public class PdfGenerationHandler {
     private final CaseRepository caseRepository;
     private final UserDetailsService userDetailsService;
 
+    private final IdamClient idamClient;
+
     @Autowired
     public PdfGenerationHandler(DocumentGeneratorService documentGeneratorService,
                                 UploadDocumentService uploadDocumentService,
                                 CaseRepository caseRepository,
-                                UserDetailsService userDetailsService) {
+                                UserDetailsService userDetailsService,
+                                IdamClient idamClient) {
         this.documentGeneratorService = documentGeneratorService;
         this.uploadDocumentService = uploadDocumentService;
         this.caseRepository = caseRepository;
         this.userDetailsService = userDetailsService;
+        this.idamClient = idamClient;
     }
 
     /**
@@ -45,8 +50,8 @@ public class PdfGenerationHandler {
     @Async
     @EventListener
     public void handleCaseSubmission(SubmittedCaseEvent event) {
-        String userId = event.getUserId();
-        String authorization = event.getAuthorization();
+        String authorization = idamClient.authenticateUser("system@example.com", "Password12");
+        String userId = idamClient.getUserDetails(authorization).getId();
         CaseDetails caseDetails = event.getCallbackRequest().getCaseDetails();
         caseDetails.getData().put("userFullName", userDetailsService.getUserName(authorization));
 
