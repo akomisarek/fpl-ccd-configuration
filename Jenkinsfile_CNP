@@ -1,6 +1,6 @@
 #!groovy
 
-@Library("Infrastructure")
+@Library("Infrastructure@hmctsdemo_aks")
 
 import uk.gov.hmcts.contino.Consul
 import uk.gov.hmcts.contino.Kubectl
