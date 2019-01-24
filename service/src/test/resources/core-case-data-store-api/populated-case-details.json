@@ -31,9 +31,12 @@
     },
     "orders": {
       "orderType": [
-        "Emergency protection order"
+        "EMERGENCY_PROTECTION_ORDER"
       ],
-      "directionsAndInterim": "Information on the whereabouts of the child"
+      "directions": "Yes",
+      "emergencyProtectionOrderDirections": [
+        "CONTACT_WITH_NAMED_PERSON"
+      ]
     },
     "others": {
       "firstOther": {
@@ -89,6 +92,12 @@
         "beyondControl"
       ],
       "thresholdDetails": "grounds for application criteria"
+    },
+    "groundsForEPO": {
+      "reason": [
+        "HARM_IF_NOT_MOVED_TO_NEW_ACCOMMODATION",
+        "HARM_IF_KEPT_IN_CURRENT_ACCOMMODATION"
+      ]
     },
     "hearing": {
       "type": "Contested interim care order",
@@ -315,7 +324,9 @@
       "proceedingsReason": "Outside of the UK",
       "significantEvents": "Yes",
       "possibleCarerReason": "Aunt outside UK",
-      "significantEventsReason": "Something happened in France"
+      "significantEventsReason": "Something happened in France",
+      "internationalAuthorityInvolvement": "Yes",
+      "internationalAuthorityInvolvementDetails": "French authorities were involved"
     },
     "documents_socialWorkOther": [
       {
