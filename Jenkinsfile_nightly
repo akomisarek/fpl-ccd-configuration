@@ -35,8 +35,6 @@ withNightlyPipeline(type, product, component) {
 
 
   before('crossBrowserTest') {
-    env.SAUCE_USERNAME = 'username'
-    env.SAUCE_ACCESS_KEY = 'privatekey'
     env.URL = 'http://ccd-case-management-web-aat.service.core-compute-aat.internal'
     env.PROXY_SERVER = 'proxyout.reform.hmcts.net:8080'
     try {
