@@ -14,6 +14,7 @@ def component = 'case-service'
 withNightlyPipeline(type, product, component) {
   enableMutationTest()
   enableFullFunctionalTest()
+  enableCrossBrowserTest()
 
   after('mutationTest') {
     withSonarQubeEnv('SonarQube') {
@@ -27,6 +28,17 @@ withNightlyPipeline(type, product, component) {
 
     try {
       sh('./gradlew --no-daemon --info --rerun-tasks functional')
+    } finally {
+      archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
+    }
+  }
+
+
+  before('crossBrowserTest') {
+    env.URL = 'http://ccd-case-management-web-aat.service.core-compute-aat.internal'
+    env.PROXY_SERVER = 'proxyout.reform.hmcts.net:8080'
+    try {
+      sh('./gradlew --no-daemon --info --rerun-tasks crossBroswer')
     } finally {
       archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
     }

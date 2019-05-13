@@ -53,4 +53,15 @@ module.exports = {
   presidentsGuidanceUrl: 'https://www.judiciary.uk/wp-content/uploads/2013/03/President%E2%80%99s-Guidance-on-Allocation-and-Gatekeeping.pdf',
   scheduleUrl: 'https://www.judiciary.uk/wp-content/uploads/2013/03/Schedule-to-the-President%E2%80%99s-Guidance-on-Allocation-and-Gatekeeping.pdf',
   otherProposalUrl: '/otherProposal/otherProposal1',
+  saucelabs:{
+    browser: 'chrome',
+    username: 'username',
+    key: 'privatekey',
+    tunnelId: 'reformtunnel',
+    waitForTimeout: 60000,
+    smartWait : 45000,
+  },
+  e2e: {
+    frontendUrl: 'http://localhost:3451'
+  }
 };

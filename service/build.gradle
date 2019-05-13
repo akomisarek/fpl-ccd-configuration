@@ -82,12 +82,26 @@ task runFunctionalTest(type: Exec, description: 'Runs E2E tests.') {
   commandLine '/usr/bin/yarn', '--silent', 'test:functional'
 }
 
+task runCrossBrowserTest(type: Exec, description: 'Runs Cross browser tests.') {
+  onlyIf(new Spec<Task>() {
+    boolean isSatisfiedBy(Task task) {
+      String skipTestsEnvironmentVariable = System.env.SKIP_FUNCTIONAL_TESTS
+      return skipTestsEnvironmentVariable == null || skipTestsEnvironmentVariable == 'false'
+    }
+  })
+  commandLine '/usr/bin/yarn', '--silent', 'test:crossbrowser'
+}
+
 task smoke(description: 'Runs the smoke tests.') {
   dependsOn(awaitApplicationReadiness, installDependencies, runSmokeTests)
 }
 
 task functional(description: 'Runs the functional tests.') {
   dependsOn(awaitApplicationReadiness, installDependencies, runFunctionalTest)
+}
+
+task crossBroswer(description: 'Runs the cross browser functional tests.') {
+  dependsOn(awaitApplicationReadiness, installDependencies, runCrossBrowserTest)
 }
 
 checkstyle {

@@ -2,6 +2,7 @@
 const _ = require('lodash');
 
 const container = require('codeceptjs').container;
+process.env.PROXY_SERVER = 'proxyout.reform.hmcts.net:8080';
 
 container.support = new Proxy(container.support, {
   /**
