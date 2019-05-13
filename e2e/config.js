@@ -62,6 +62,6 @@ module.exports = {
     smartWait : 45000,
   },
   e2e: {
-    frontendUrl: 'http://localhost:3451'
-  }
+    frontendUrl: 'http://localhost:3451',
+  },
 };
