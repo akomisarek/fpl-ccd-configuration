@@ -55,8 +55,8 @@ module.exports = {
   otherProposalUrl: '/otherProposal/otherProposal1',
   saucelabs:{
     browser: 'chrome',
-    username: 'username',
-    key: 'privatekey',
+    username: 'SivaK',
+    key: '65e1e5c6-ae4b-4432-9854-276fff0610d8',
     tunnelId: 'reformtunnel',
     waitForTimeout: 60000,
     smartWait : 45000,
