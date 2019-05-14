@@ -12,9 +12,9 @@ def product = 'fpl'
 def component = 'case-service'
 
 withNightlyPipeline(type, product, component) {
+  enableCrossBrowserTest()
   enableMutationTest()
   enableFullFunctionalTest()
-  enableCrossBrowserTest()
 
   after('mutationTest') {
     withSonarQubeEnv('SonarQube') {
