@@ -14,9 +14,8 @@ const waitForTimeout = parseInt(CONF.saucelabs.waitForTimeout);
 const smartWait = parseInt(CONF.saucelabs.smartWait);
 const browser = process.env.SAUCE_BROWSER || CONF.saucelabs.browser;
 const tunnelName = process.env.SAUCE_TUNNEL_IDENTIFIER || CONF.saucelabs.tunnelId;
-console.log(browser);
-console.log(tunnelName);
-
+console.log(process.env.SAUCE_USERNAME);
+console.log(process.env.SAUCE_ACCESS_KEY);
 const { config } = require('./codecept.conf');
 
 //console.log('before', config);
@@ -30,8 +29,8 @@ config.helpers.WebDriverIO = {
   host: 'ondemand.eu-central-1.saucelabs.com',
   port: 80,
   region: 'eu',
-  user: process.env.SAUCE_USERNAME,
-  key: process.env.SAUCE_ACCESS_KEY,
+  user: process.env.SAUCE_USERNAME || CONF.saucelabs.username,
+  key: process.env.SAUCE_ACCESS_KEY || CONF.saucelabs.key,
   desiredCapabilities: {},
 };
 config.helpers.SauceLabsReportingHelper = {
