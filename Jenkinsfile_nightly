@@ -39,7 +39,7 @@ withNightlyPipeline(type, product, component) {
     env.PROXY_SERVER = 'proxyout.reform.hmcts.net:8080'
     withSauceConnect("reform_tunnel"){
     try {
-      sh('./gradlew --no-daemon --info --rerun-tasks crossBroswer')
+      sh('./gradlew --info --rerun-tasks crossBroswer')
     } finally {
       archiveArtifacts allowEmptyArchive: true, artifacts: 'output/**/*'
     }
