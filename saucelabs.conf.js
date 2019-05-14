@@ -29,8 +29,8 @@ config.helpers.WebDriverIO = {
   host: 'ondemand.eu-central-1.saucelabs.com',
   port: 80,
   region: 'eu',
-  user: process.env.SAUCELABS_USERNAME || CONF.saucelabs.username,
-  key: process.env.SAUCELABS_ACCESS_KEY || CONF.saucelabs.key,
+  user: process.env.SAUCE_USERNAME,
+  key: process.env.SAUCE_ACCESS_KEY,
   desiredCapabilities: {},
 };
 config.helpers.SauceLabsReportingHelper = {
