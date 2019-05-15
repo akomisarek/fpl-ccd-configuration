@@ -20,24 +20,6 @@ const { config } = require('./codecept.conf');
 
 //console.log('before', config);
 
-delete config.helpers.Puppeteer;
-config.helpers.WebDriverIO = {
-  url: process.env.URL || CONF.e2e.frontendUrl ,
-  browser:browser ,
-  smartWait: smartWait,
-  cssSelectorsEnabled: 'true',
-  host: 'ondemand.eu-central-1.saucelabs.com',
-  port: 80,
-  region: 'eu',
-  user: process.env.SAUCE_USERNAME || CONF.saucelabs.username,
-  key: process.env.SAUCE_ACCESS_KEY || CONF.saucelabs.key,
-  desiredCapabilities: {},
-};
-config.helpers.SauceLabsReportingHelper = {
-  require: './e2e/helpers/SauceLabsReportingHelper.js',
-};
-
-
 const getBrowserConfig = (browserGroup) => {
   const browserConfig = [];
   for (const candidateBrowser in supportedBrowsers[browserGroup]) {
@@ -54,6 +36,24 @@ const getBrowserConfig = (browserGroup) => {
     }
   }
   return browserConfig;
+};
+
+delete config.helpers.Puppeteer;
+config.helpers.WebDriverIO = {
+  url: process.env.URL || CONF.e2e.frontendUrl ,
+  browser:browser ,
+  waitForTimeout: waitForTimeout,
+  smartWait: smartWait,
+  cssSelectorsEnabled: 'true',
+  host: 'ondemand.eu-central-1.saucelabs.com',
+  port: 80,
+  region: 'eu',
+  user: process.env.SAUCE_USERNAME || CONF.saucelabs.username,
+  key: process.env.SAUCE_ACCESS_KEY || CONF.saucelabs.key,
+  desiredCapabilities: {},
+};
+config.helpers.SauceLabsReportingHelper = {
+  require: './e2e/helpers/SauceLabsReportingHelper.js',
 };
 
 
