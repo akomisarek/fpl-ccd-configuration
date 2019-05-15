@@ -38,10 +38,11 @@ const getBrowserConfig = (browserGroup) => {
   return browserConfig;
 };
 
-delete config.helpers.Puppeteer;
+
+  delete config.helpers.Puppeteer;
 config.helpers.WebDriverIO = {
-  url: process.env.URL || CONF.e2e.frontendUrl ,
-  browser:browser ,
+  url: process.env.URL || CONF.e2e.frontendUrl,
+  browser: browser,
   waitForTimeout: waitForTimeout,
   smartWait: smartWait,
   cssSelectorsEnabled: 'true',
@@ -74,3 +75,4 @@ config.multiple.chrome = {
 console.log('after', config);
 
 exports.config = config;
+

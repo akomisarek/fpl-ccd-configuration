@@ -89,7 +89,7 @@ task runCrossBrowserTest(type: Exec, description: 'Runs Cross browser tests.') {
       return skipTestsEnvironmentVariable == null || skipTestsEnvironmentVariable == 'false'
     }
   })
-  commandLine '/usr/bin/yarn', '--silent', 'test:crossbrowser'
+  commandLine '/usr/bin/yarn', 'test:crossbrowser'
 }
 
 task smoke(description: 'Runs the smoke tests.') {
