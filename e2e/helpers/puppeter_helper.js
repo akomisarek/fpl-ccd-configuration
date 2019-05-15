@@ -8,12 +8,12 @@ module.exports = class MyHelpers extends Helper {
   }
 
   reloadPage() {
-    const page = this.helpers['WebDriverIO'] || this.helpers['Puppeteer'].page;
+    const page = this.helpers['WebDriverIO'].page || this.helpers['Puppeteer'].page;
     return page.reload();
   }
 
   navigateToUrl(url) {
-    const page = this.helpers['WebDriverIO'] || this.helpers['Puppeteer'].page;
+    const page = this.helpers['WebDriverIO'].page || this.helpers['Puppeteer'].page;
     return page.goto(url);
   }
 };
