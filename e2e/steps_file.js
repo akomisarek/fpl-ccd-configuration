@@ -71,7 +71,8 @@ module.exports = function () {
 
     navigateToCaseDetails(caseId) {
       const href = `${baseUrl}/case/${config.definition.jurisdiction}/${config.definition.caseType}/${caseId.replace(/\D/g, '')}`;
-      this.navigateToUrl(href);
+      //this.navigateToUrl(href);
+      this.amOnPage(href);
     },
   });
 };
