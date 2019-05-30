@@ -28,6 +28,14 @@
   {
     "LiveFrom": "01/01/2017",
     "CaseTypeID": "CARE_SUPERVISION_EPO",
+    "ID": "keyword",
+    "Label": "keyword",
+    "FieldType": "Text",
+    "SecurityClassification": "Public"
+  },
+  {
+    "LiveFrom": "01/01/2017",
+    "CaseTypeID": "CARE_SUPERVISION_EPO",
     "ID": "EPO_REASONING_SHOW",
     "Label": "EPO Reason show or hide",
     "FieldType": "MultiSelectList",
@@ -324,6 +332,15 @@
     "Label": "Gatekeeper's email address",
     "FieldType": "Email",
     "HintText": "For example, joe.bloggs@la.gov.uk",
+    "SecurityClassification": "Public"
+  },
+  {
+    "LiveFrom": "01/01/2017",
+    "CaseTypeID": "CARE_SUPERVISION_EPO",
+    "ID": "searchACase",
+    "Label": "Search for a case",
+    "FieldType": "Text",
+    "HintText": "For example, applicant",
     "SecurityClassification": "Public"
   }
 ]
