@@ -229,7 +229,7 @@
     "CaseEventID": "enterChildren",
     "CaseFieldID": "children",
     "PageFieldDisplayOrder": 1,
-    "DisplayContext": "OPTIONAL",
+    "DisplayContext": "COMPLEX",
     "PageID": 1,
     "PageDisplayOrder": 1,
     "PageColumnNumber": 1,

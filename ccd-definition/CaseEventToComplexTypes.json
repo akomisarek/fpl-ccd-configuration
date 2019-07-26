@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "LiveFrom": "01/01/2017",
+    "ID": "Child",
+    "CaseEventID": "enterChildren",
+    "CaseFieldID": "children",
+    "ListElementCode": "childName",
+    "EventElementLabel": "Name",
+    "FieldDisplayOrder": 1,
+    "DisplayContext": "MANDATORY"
+  },
+  {
+    "LiveFrom": "01/01/2017",
+    "ID": "Child",
+    "CaseEventID": "enterChildren",
+    "CaseFieldID": "children",
+    "ListElementCode": "childDOB",
+    "EventElementLabel": "Date of birth",
+    "FieldDisplayOrder": 2,
+    "DisplayContext": "OPTIONAL"
+  }
+]

@@ -184,7 +184,7 @@
     "CaseTypeID": "CARE_SUPERVISION_EPO",
     "ID": "children",
     "Label": "Children",
-    "FieldType": "Children",
+    "FieldType": "Child",
     "SecurityClassification": "Public"
   },
   {
