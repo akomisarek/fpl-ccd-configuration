@@ -108,7 +108,7 @@
     "ListElementCode": "livingSituation",
     "FieldType": "FixedList",
     "FieldTypeParameter": "LivingSituationList",
-    "ElementLabel": "Describe child's situation",
+    "ElementLabel": "Child's living situation",
     "SecurityClassification": "Public"
   },
   {
@@ -116,7 +116,7 @@
     "ID": "Child",
     "ListElementCode": "situationDetails",
     "FieldType": "TextArea",
-    "ElementLabel": "Details",
+    "ElementLabel": "Give details",
     "FieldShowCondition": "livingSituation=\"Other\"",
     "SecurityClassification": "Public"
   },
